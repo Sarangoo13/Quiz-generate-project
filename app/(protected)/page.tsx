@@ -1,12 +1,20 @@
 "use client";
 import { Header } from "@/components/Header";
+import { Quick } from "@/components/Quick";
 import { Sidebar } from "@/components/ui/sidebar";
 import { useState } from "react";
-
+type HeaderProps = {
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+  generateSummery: () => void;
+  summery: string;
+  generateQuiz: () => void;
+};
 export default function Home() {
   const [text, setText] = useState<string>("");
   const [summery, setSummery] = useState<string>("");
-
+  const [quiz, setQuiz] = useState<string>("");
+  const [loading, setLoading] = useState(false);
   const generateSummery = async () => {
     const res = await fetch("/api/generate", {
       method: "POST",
@@ -18,6 +26,17 @@ export default function Home() {
     console.log(summery);
   };
 
+  // const generateQuiz = async () => {
+  //   const res = await fetch("/api/generate", {
+  //     method: "POST",
+  //     body: text,
+  //   });
+  //   const quiz = await res.json();
+  //   console.log(quiz, "quuuuuuzi");
+  //   setQuiz(quiz.text);
+  //   console.log();
+  // };
+
   return (
     <div>
       <Sidebar></Sidebar>
@@ -27,6 +46,7 @@ export default function Home() {
         summery={summery}
         generateSummery={generateSummery}
       />
+      <Quick></Quick>
     </div>
   );
 }
