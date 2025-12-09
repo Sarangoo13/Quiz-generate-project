@@ -24,18 +24,14 @@ export const POST = async (req: NextRequest) => {
       Make sure the response is valid JSON and the answer is the index (0-3) of the correct option.`,
   });
 
- 
-const Text=response?.candidates?.[0]?.content?.parts?.[0]?.text||"";
- const slice = Text?.slice(7, Text.length - 3);
+  console.log("summery", response.candidates?.[0].content?.parts?.[0]);
+  console.log("quiz", quiz.candidates?.[0].content?.parts?.[0]);
 
-  console.log(response);
-  console.log(quiz);
-  const quiz1 = JSON.parse(slice);
-  return NextResponse.json(response.candidates?.[0].content?.parts?.[0], quiz1);
+  
+  return NextResponse.json(response.candidates?.[0].content?.parts?.[0]);
 };
 
-
-// [
+// ```json[
 //   {
 //     "question": "What was Genghis Khan's birth name?",
 //     "options": ["Jamukha", "Temüjin", "Kublai", "Naiman"],
@@ -61,5 +57,5 @@ const Text=response?.candidates?.[0]?.content?.parts?.[0]?.text||"";
 //     "options": ["Only the Mongol steppe", "Across China and Central Asia", "Into Europe and North Africa", "South America and Australia"],
 //     "answer": "1"
 //   }
-// const str = ```json]
+// const str = ]
 // ```;
